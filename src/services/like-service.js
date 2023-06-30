@@ -16,11 +16,13 @@ class LikeService {
             throw new Error('unknow model type'); 
         }
         // this exists is not working
-        const exists = await this.likeRepository.findByUserAndLikeable({
+        let exists = await this.likeRepository.findByUserAndLikeable({
             user: userId,
             onModel: modelType,
             linkeable: modelId
         });
+
+        console.log("it is exist", exists);
 
         if(exists) {
            likeable.likes.pull(exists.id);
